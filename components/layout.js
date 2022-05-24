@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import Head from 'next/head'
 import Flex from './flex'
 
 import ShoppingCart from './icons/shopping-cart'
@@ -33,6 +34,14 @@ const LayoutStyle = styled.div`
 const Layout = ({ children }) => {
   return (
     <LayoutStyle>
+      <Head>
+        <meta name="description" content="Plants Store" />
+        <meta name="author" content="Manuel Morales" />
+        <meta name="author" content="ppjuan_94@hotmail.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+        <title>Plants Store</title>
+      </Head>
       <div className="nav">
         <Flex>
           <Title>Plants Store</Title>
