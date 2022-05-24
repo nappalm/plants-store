@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Head from 'next/head'
 import { useContext } from 'react'
@@ -7,19 +8,38 @@ import Flex from './flex'
 import ShoppingCart from './icons/shopping-cart'
 import Text, { Title } from './text'
 
-const LayoutStyle = styled.div`
+const centerContent = css`
   margin-inline-start: auto;
   margin-inline-end: auto;
   max-width: 60rem;
+`
+
+const LayoutStyle = styled.div`
   margin-top: 1rem;
+  ${centerContent};
+
   .content {
-    margin-top: 1rem;
+    margin-top: 5rem;
   }
+
   .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
+    border-bottom: 1px solid #000;
+    z-index: 1;
+    background: white;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+
+    &-content {
+      ${centerContent};
+      min-height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 
   .shopping-cart-preview {
@@ -47,15 +67,17 @@ const Layout = ({ children }) => {
         <title>Plants Store</title>
       </Head>
       <div className="nav">
-        <Flex>
-          <Title>Plants Store</Title>
-          <Text>
-            This project is only a preview, it does not include functionality
-          </Text>
-        </Flex>
-        <div className="shopping-cart-preview">
-          <div className="shopping-cart-counter">{items.length}</div>
-          <ShoppingCart />
+        <div className="nav-content">
+          <Flex>
+            <Title>Plants Store</Title>
+            <Text>
+              This project is only a preview, it does not include functionality
+            </Text>
+          </Flex>
+          <div className="shopping-cart-preview">
+            <div className="shopping-cart-counter">{items.length}</div>
+            <ShoppingCart />
+          </div>
         </div>
       </div>
       <div className="content">{children}</div>
