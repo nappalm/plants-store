@@ -64,7 +64,7 @@ const Root = () => {
                 mt={0.5}
                 w="100%"
               >
-                {inStore ? 'Remove to cart' : 'Add to cart'}
+                {inStore ? 'Remove from cart' : 'Add to cart'}
               </Button>
             </Card>
           )
