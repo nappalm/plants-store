@@ -6,7 +6,7 @@ import Flex from '../components/flex'
 import Image from '../components/image'
 import Button from '../components/button'
 
-import { Offer, Title } from '../components/text'
+import { Offer, Small, Title } from '../components/text'
 
 import Counter from '../components/counter'
 
@@ -47,13 +47,13 @@ const Root = () => {
               {item.offer && <Offer />}
               <Image src={`plants-v2/${item.image}`} alt={item.title} />
               <Flex gap={1} p={1}>
-                <Title>{item.title}</Title>
+                <Title hoverLink>{item.title}</Title>
                 <Flex direction="row" gap={1}>
                   <Title textDecoration={item.offer && 'line-through'}>
                     ${item.price}
                   </Title>
                   {item.offer && <Title>${item.offer_value}</Title>}
-                  USD
+                  <Small>USD</Small>
                 </Flex>
                 <Counter />
               </Flex>

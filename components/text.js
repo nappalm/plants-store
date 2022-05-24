@@ -9,15 +9,33 @@ export const Text = ({ children, ...rest }) => {
 }
 
 const TitleStyle = styled.h4`
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0;
   color: #4f4f4f;
   text-decoration: ${props => props.textDecoration};
+
+  ${props =>
+    props.hoverLink === 'true' &&
+    `
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  `};
 `
 
-export const Title = ({ children, textDecoration = 'none', ...rest }) => {
+export const Title = ({
+  children,
+  textDecoration = 'none',
+  hoverLink = false,
+  ...rest
+}) => {
   return (
-    <TitleStyle textDecoration={textDecoration} {...rest}>
+    <TitleStyle
+      hoverLink={hoverLink.toString()}
+      textDecoration={textDecoration}
+      {...rest}
+    >
       {children}
     </TitleStyle>
   )
@@ -52,6 +70,15 @@ const OfferStyle = styled.span`
 
 export const Offer = ({ position = 'right-top' }) => {
   return <OfferStyle position={position}>Offer</OfferStyle>
+}
+
+const SmallStyle = styled.span`
+  color: #7f7f7f;
+  font-size: 14px;
+`
+
+export const Small = ({ children }) => {
+  return <SmallStyle>{children}</SmallStyle>
 }
 
 export default Text
