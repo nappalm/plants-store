@@ -1,3 +1,4 @@
+import { useCallback, useContext } from 'react'
 import styled from '@emotion/styled'
 
 import Card from '../components/card'
@@ -19,30 +20,55 @@ const GridItems = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 `
 
+import { StoreContext } from '../app/storeContext'
+
 const Root = () => {
+  const { items, toggleItem } = useContext(StoreContext)
+
+  console.log(items)
+
+  const handleAdd = item => toggleItem(item)
+
+  const existItem = useCallback(
+    item => {
+      const someEl = items.some(({ id }) => id == item.id)
+      return someEl
+    },
+    [items]
+  )
+
   return (
     <Flex direction="column">
       <GridItems>
-        {data.map(item => (
-          <Card showShadow={item.offer} key={item.id} textAlign="center">
-            {item.offer && <Offer />}
-            <Image src={`plants-v2/${item.image}`} alt={item.title} />
-            <Flex gap={1} p={1}>
-              <Title>{item.title}</Title>
-              <Flex direction="row" gap={1}>
-                <Title textDecoration={item.offer && 'line-through'}>
-                  ${item.price}
-                </Title>
-                {item.offer && <Title>${item.offer_value}</Title>}
-                USD
+        {data.map(item => {
+          const inStore = existItem(item)
+          return (
+            <Card showShadow={inStore} key={item.id} textAlign="center">
+              {item.offer && <Offer />}
+              <Image src={`plants-v2/${item.image}`} alt={item.title} />
+              <Flex gap={1} p={1}>
+                <Title>{item.title}</Title>
+                <Flex direction="row" gap={1}>
+                  <Title textDecoration={item.offer && 'line-through'}>
+                    ${item.price}
+                  </Title>
+                  {item.offer && <Title>${item.offer_value}</Title>}
+                  USD
+                </Flex>
+                <Counter />
               </Flex>
-              <Counter />
-            </Flex>
-            <Button mb={0.5} mt={0.5} w="100%">
-              Add to cart
-            </Button>
-          </Card>
-        ))}
+              <Button
+                focused={inStore}
+                onClick={() => handleAdd(item)}
+                mb={0.5}
+                mt={0.5}
+                w="100%"
+              >
+                {inStore ? 'Remove to cart' : 'Add to cart'}
+              </Button>
+            </Card>
+          )
+        })}
       </GridItems>
     </Flex>
   )

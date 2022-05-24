@@ -42,7 +42,7 @@ const items = [
       'Recharge your skin with the super energizing power of finely crushed tourmaline powder blended with natural complexion'
   },
   {
-    id: 5,
+    id: 8,
     title: 'Queen Aglaonema',
     image: 'ezgif-5-c0864d61bd.jpg',
     price: '22.99',

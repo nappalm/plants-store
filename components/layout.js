@@ -1,5 +1,7 @@
 import styled from '@emotion/styled'
 import Head from 'next/head'
+import { useContext } from 'react'
+import { StoreContext } from '../app/storeContext'
 import Flex from './flex'
 
 import ShoppingCart from './icons/shopping-cart'
@@ -32,6 +34,8 @@ const LayoutStyle = styled.div`
 `
 
 const Layout = ({ children }) => {
+  const { items } = useContext(StoreContext)
+
   return (
     <LayoutStyle>
       <Head>
@@ -50,7 +54,7 @@ const Layout = ({ children }) => {
           </Text>
         </Flex>
         <div className="shopping-cart-preview">
-          <div className="shopping-cart-counter">0</div>
+          <div className="shopping-cart-counter">{items.length}</div>
           <ShoppingCart />
         </div>
       </div>

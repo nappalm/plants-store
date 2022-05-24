@@ -1,4 +1,12 @@
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
+
+const hoverStyle = css`
+  transform: translate(-0.25rem, -0.25rem);
+  box-shadow: 0.25rem 0.25rem #000;
+  color: white;
+  background-color: #0093f5;
+`
 
 const ButtonStyle = styled.button`
   width: ${props => props.w};
@@ -21,16 +29,32 @@ const ButtonStyle = styled.button`
   margin-top: ${props => props.mt}rem;
 
   &:hover {
-    transform: translate(-0.25rem, -0.25rem);
-    box-shadow: 0.25rem 0.25rem #000;
-    color: white;
-    background-color: #0093f5;
+    ${hoverStyle};
   }
+
+  ${props => props.focused === 'true' && hoverStyle};
 `
 
-const Button = ({ children, variant = 'solid', w = 'auto', m = 0, mb, mt }) => {
+const Button = ({
+  children,
+  variant = 'solid',
+  w = 'auto',
+  m = 0,
+  mb,
+  mt,
+  focused = false,
+  ...rest
+}) => {
   return (
-    <ButtonStyle w={w} variant={variant} m={m} mb={mb} mt={mt}>
+    <ButtonStyle
+      focused={focused.toString()}
+      variant={variant}
+      w={w}
+      m={m}
+      mb={mb}
+      mt={mt}
+      {...rest}
+    >
       {children}
     </ButtonStyle>
   )
